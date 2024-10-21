@@ -1,0 +1,85 @@
+
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <style>
+            span {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>                 
+        <textarea id="inputVal" rows="5" cols="50">The quick brown fox jumps over the lazy dog.</textarea><br>
+        <button type="button" onclick="count()">Count</button><br><br>
+        <div>Word Count: <span id="wordcount"></span></div>
+        <div>Count Small Letters: <span id="cntSmall"></span></div>
+        <div>Count Capital Letters: <span id="cntCaps"></span></div>
+        <div>The First word is: <span id="sFirstW"></span></div>
+        <div>The Last word is: <span id="sLastW"></span></div>
+        <div>The last instance of the word 'the' is found in position: <span id="iIdxLastW"></span></div>
+    </body>
+    <script>
+        const sText = document.getElementById('inputVal').value;
+
+        function count() {
+
+            document.getElementById("wordcount").innerHTML = getWordCount();
+            document.getElementById("cntSmall").innerHTML = countSmallLetters();
+            document.getElementById("cntCaps").innerHTML = countCapitalLetters();
+            document.getElementById("sFirstW").innerHTML = findFirstWord();
+            document.getElementById("sLastW").innerHTML = findLastWord();
+            document.getElementById("iIdxLastW").innerHTML = lastInstanceOfThe();
+        }
+
+        function lastInstanceOfThe(){
+            return sText.lastIndexOf('t');
+        }
+
+        function findFirstWord(){
+            let inputText = sText;
+            inputText = inputText.split(" ");
+            return inputText[0];
+        }
+
+
+        function findLastWord(){
+            let inputText = sText;
+            inputText = inputText.split(" ");
+            return inputText[inputText.length-1];
+        }
+
+        function getWordCount(){
+            let inputText = sText;
+            return inputText.split(" ").length;
+        }
+
+        function countSmallLetters(){
+            let smallText = sText.toLowerCase();
+            let count = 0;
+            for(let i = 0; i < sText.length - 1; i++){
+                if(sText[i] === smallText[i]){
+                    if(sText[i] != " "){
+                        count++;
+                    }
+                }
+                
+            }
+            return count;
+        }
+
+        function countCapitalLetters(){
+            let capitalText = sText.toUpperCase();
+            let count = 0;
+            for(let i = 0; i < sText.length - 1; i++){
+                if(sText[i] === capitalText[i]){
+                    if(sText[i] != " "){
+                        count++;
+                    }
+                }
+                
+            }
+            return count;
+        }
+    </script>
+</html>
